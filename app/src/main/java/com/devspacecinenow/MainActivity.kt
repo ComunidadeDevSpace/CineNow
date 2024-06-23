@@ -49,8 +49,8 @@ class MainActivity : ComponentActivity() {
                 var upcomingMovies by remember { mutableStateOf<List<MovieDto>>(emptyList()) }
 
                 val apiService = RetrofitClient.retrofitInstance.create(ApiService::class.java)
-                val callNowPlaying = apiService.getNowPlayingMovies()
 
+                val callNowPlaying = apiService.getNowPlayingMovies()
                 callNowPlaying.enqueue(object : Callback<MovieResponse> {
                     override fun onResponse(
                         call: Call<MovieResponse>,
@@ -116,7 +116,7 @@ class MainActivity : ComponentActivity() {
 
                 })
 
-                val callUpcoming = apiService.getPopularMovies()
+                val callUpcoming = apiService.getUpcomingMovies()
                 callUpcoming.enqueue(object : Callback<MovieResponse>{
                     override fun onResponse(
                         call: Call<MovieResponse>,
@@ -174,7 +174,7 @@ class MainActivity : ComponentActivity() {
 
                         MovieSession(
                             label = "Popular",
-                            movieList = nowPlayingMovies,
+                            movieList = popularMovies,
                             onClick = { movieClicked ->
 
                             }
@@ -182,7 +182,7 @@ class MainActivity : ComponentActivity() {
 
                         MovieSession(
                             label = "Upcoming",
-                            movieList = nowPlayingMovies,
+                            movieList = upcomingMovies,
                             onClick = { movieClicked ->
 
                             }
